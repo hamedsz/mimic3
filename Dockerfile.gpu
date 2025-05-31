@@ -58,12 +58,13 @@ RUN --mount=type=cache,id=pip-requirements,target=/root/.cache/pip \
 # Copy default voice
 COPY voices/ /usr/local/share/mycroft/mimic3/voices/
 
+RUN apt-get install -y wget
+
 RUN mkdir -p /usr/local/share/mycroft/mimic3/voices/en_US/hifi-tts_low
 RUN wget -O /usr/local/share/mycroft/mimic3/voices/en_US/hifi-tts_low/generator.onnx https://huggingface.co/mukowaty/mimic3-voices/resolve/main/voices/en_US/hifi-tts_low/generator.onnx
 
 RUN mkdir -p /usr/local/share/mycroft/mimic3/voices/fa/haaniye_low
 RUN wget -O /usr/local/share/mycroft/mimic3/voices/fa/haaniye_low/generator.onnx https://huggingface.co/mukowaty/mimic3-voices/resolve/main/voices/fa/haaniye_low/generator.onnx
-
 
 RUN useradd -ms /bin/bash mimic3
 
