@@ -63,11 +63,11 @@ RUN --mount=type=cache,id=pip-requirements,target=/root/.cache/pip \
 # Copy default voice
 #COPY voices/ /usr/local/share/mycroft/mimic3/voices/ 
 
-RUN mkdir -p /usr/share/mycroft/mimic3/voices/en_US/hifi-tts_low
-RUN wget -O /usr/share/mycroft/mimic3/voices/en_US/hifi-tts_low/generator.onnx https://huggingface.co/mukowaty/mimic3-voices/resolve/main/voices/en_US/hifi-tts_low/generator.onnx
+RUN mkdir -p /home/mimic3/.local/share/mycroft/mimic3/voices/en_US/hifi-tts_low
+RUN wget -O /home/mimic3/.local/share/mycroft/mimic3/voices/en_US/hifi-tts_low/generator.onnx https://huggingface.co/mukowaty/mimic3-voices/resolve/main/voices/en_US/hifi-tts_low/generator.onnx
 
-RUN mkdir -p /usr/share/mycroft/mimic3/voices/fa/haaniye_low
-RUN wget -O /usr/share/mycroft/mimic3/voices/fa/haaniye_low/generator.onnx https://huggingface.co/mukowaty/mimic3-voices/resolve/main/voices/fa/haaniye_low/generator.onnx
+RUN mkdir -p /home/mimic3/.local/share/mycroft/mimic3/voices/fa/haaniye_low
+RUN wget -O /home/mimic3/.local/share/mycroft/mimic3/voices/fa/haaniye_low/generator.onnx https://huggingface.co/mukowaty/mimic3-voices/resolve/main/voices/fa/haaniye_low/generator.onnx
 
 # Create a group and user with specific UID/GID for better permission handling
 ARG USER_ID=1000
@@ -81,7 +81,7 @@ RUN groupadd -g ${GROUP_ID} mimic3 && \
     # Ensure the app directory is owned by the user
     chown -R mimic3:mimic3 /home/mimic3/app && \
     # Ensure voice directories are writable
-    chown -R mimic3:mimic3 /usr/share/mycroft/mimic3/voices
+    chown -R mimic3:mimic3 /home/mimic3/.local/share/mycroft/mimic3/voices
 
 # Switch to non-root user
 USER mimic3
